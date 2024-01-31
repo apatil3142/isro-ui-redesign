@@ -1,0 +1,56 @@
+{
+  "menuList": [
+    {
+      "name": "Home", 
+      "to": "/home"
+    },
+    {
+      "name": "About", 
+      "to": "/about",
+      "subMenu": [
+        {
+          "name": "Profile",
+          "to": "/about/profile"
+        },
+        {
+          "name": "Vision-Mission-Objectives",
+          "to": "/about/vision-mission-objectives"
+        },
+        {
+          "name": "Citizen Charter",
+          "to": "/about/citizen-charter"
+        },
+        {
+          "name": "Organisational Structure",
+          "to": "/about/organisational-structure"
+        }
+      ]
+    },
+    {
+      "name": "Activities", 
+      "to": "/activities",
+      "subMenu": [
+        {
+          "name": "activities1",
+          "to": "/activities/activities1"
+        },
+        {
+          "name": "activities2",
+          "to": "/activities/activities2"
+        },
+        {
+          "name": "activities3",
+          "to": "/activities/activities3"
+        }
+      ]
+    },
+    {
+      "name": "Services", 
+      "to": "/services"
+    },
+    {
+      "name": "Programmes", 
+      "to": "/programmes"
+    }
+  ]
+}
