@@ -18,6 +18,19 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  &::before , &::after {
+    position: absolute;
+    content: '';
+    top: 0%;
+    height: 100vh;
+    width: 150px;
+    z-index: 9;
+    background: linear-gradient(to right, rgba(137, 137, 137, 0.5), transparent);
+  }
+  &::after{
+    right: 0%;
+    background: linear-gradient(to left, rgba(137, 137, 137, 0.5), transparent);
+  }
 `;
 
 const Wrapper = styled.div`
@@ -26,7 +39,6 @@ const Wrapper = styled.div`
 `;
 
 const Main = styled.div`
-  width: 1366px;
   align-items: center;
   margin: 0px auto;
 `;

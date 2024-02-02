@@ -10,10 +10,18 @@ const Container = styled.div`
   top: 0;
   width: 100%;
   height: 100px;
-  background: linear-gradient(to bottom, rgba(137, 137, 137, 0.7), transparent);
   display: flex;
   align-items: center;
   justify-content: center;
+  &::before{
+    position: absolute;
+    content: '';
+    top: 0%;
+    width: 100%;
+    left: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(137, 137, 137, 0.5), transparent);
+  }
 `;
 
 const NavbarWrapper = styled.div`
@@ -22,6 +30,7 @@ const NavbarWrapper = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
   width: 90%;
+  z-index: 9;
 `;
 
 const LogoContainer = styled.div`
