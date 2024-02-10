@@ -23,3 +23,13 @@ export const getVideoCarouselData = () => {
     }
   ];
 };
+
+export const getFlashNewsData = () => {
+  return [
+    'Aditya-L1 solar observatory is successfully inserted into Halo-Orbit around Sun-Earth L1.',
+    'XPoSat is launched successfully by PSLV-C58.',
+    'RESPOND BASKET 2023 - Last date for submission of proposals extended till February 7, 2024.',
+    'Mission Gaganyaan: TV D1 Test Flight is accomplished.',
+    'Aditya-L1: HEL1OS captures first High-Energy X-ray glimpse of Solar Flares.',
+  ];
+};

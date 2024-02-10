@@ -22,7 +22,7 @@ const Container = styled.div`
     position: absolute;
     content: '';
     top: 0%;
-    height: 100vh;
+    height: 100%;
     width: 150px;
     z-index: 9;
     background: linear-gradient(to right, rgba(137, 137, 137, 0.5), transparent);
@@ -34,8 +34,6 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  height: calc(100vh - 100px);
-  overflow-y: auto;
 `;
 
 const Main = styled.div`

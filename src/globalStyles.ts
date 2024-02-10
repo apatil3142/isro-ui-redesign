@@ -1,6 +1,14 @@
-import { createGlobalStyle } from 'styled-components';
-// import MainBG from './assets/mainBg.jpg';
+import { createGlobalStyle, css } from 'styled-components';
 import MainBg from './assets/mainBG.jpg';
+
+export const GlassEffect = css`
+  background: rgba( 255, 255, 255, 0.1 );
+  box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+  backdrop-filter: blur( 4px );
+  -webkit-backdrop-filter: blur( 4px );
+  border-radius: 6px;
+  border: 1px solid rgba( 255, 255, 255, 0.18 );
+`;
 
 const GlobalStyle = createGlobalStyle`
   body {

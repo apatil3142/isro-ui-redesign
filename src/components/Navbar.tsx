@@ -13,6 +13,8 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  backdrop-filter: blur(5px);
+  z-index: 99;
   &::before{
     position: absolute;
     content: '';
@@ -30,7 +32,7 @@ const NavbarWrapper = styled.div`
   justify-content: space-between;
   margin-bottom: 10px;
   width: 90%;
-  z-index: 9;
+  z-index: 99;
 `;
 
 const LogoContainer = styled.div`
@@ -62,6 +64,7 @@ const SubMenuDrawer = styled.div`
   border: 1px solid rgba( 255, 255, 255, 0.18 );
   min-width: 200px;
   overflow: hidden;
+  z-index: 99;
 `;
 
 const LogoTitle = styled.div`
