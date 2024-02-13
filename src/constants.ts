@@ -1,0 +1,1 @@
+export const AVG_READING_SPEED = 200; // Average reading speed in words per minute

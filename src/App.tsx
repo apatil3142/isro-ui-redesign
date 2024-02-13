@@ -39,6 +39,7 @@ const Wrapper = styled.div`
 const Main = styled.div`
   align-items: center;
   margin: 0px auto;
+  padding-bottom: 10px;
 `;
 
 function App() {
