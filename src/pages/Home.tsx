@@ -1,20 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled, { } from 'styled-components';
-import { getFlashNewsData, getLatestNews, getVideoCarouselData } from '../utils/getData';
+import { getFlashNewsData, getLatestNews, getRecentUpdates, getVideoCarouselData } from '../utils/getData';
 import { GlassEffect } from '../globalStyles';
 import { HiMiniVideoCamera } from 'react-icons/hi2';
 import { IoDesktop } from 'react-icons/io5';
 import { FaGraduationCap } from 'react-icons/fa';
 import { FaHammer } from 'react-icons/fa';
-import { AVG_READING_SPEED } from '../constants';
+import { AVG_READING_SPEED, ISRO_PORTALS } from '../constants';
 import { LuArrowLeftCircle, LuArrowRightCircle } from 'react-icons/lu';
-
 
 const Container = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 80px;
   align-items: center;
 `;
 
@@ -118,7 +117,7 @@ const Indicator = styled.div<{isActive: boolean}>`
   background-color: ${({isActive}) => isActive ? '#FFF': ''};
 `;
 
-const KeyLinksContainer = styled.div`
+const Section = styled.div`
   display: flex;
   gap: 14px;
   flex-direction: column;
@@ -212,11 +211,24 @@ const CardInfoContainer = styled.div`
   height: 50%;
   display: flex;
   padding: 10px;
-  transform: translateY(80px);
+  transform: translateY(60px);
   gap: 10px;
   flex-direction: column;
   justify-content: flex-end;
   transition: transform 0.3s ease;
+`;
+
+const NewsDesc = styled.p`
+  margin: 0;
+  white-space: wrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  line-height: 1.5;
+  height: 100px;
+  font-size: 14px;
+  color: #dddddd;
+  opacity: 0;
+  transition: all 0.3s ease-in-out;
 `;
 
 const CarouselCard = styled.div`
@@ -230,6 +242,9 @@ const CarouselCard = styled.div`
   &:hover{
     ${CardInfoContainer}{
       transform: translateY(0);
+    }
+    ${NewsDesc}{
+      opacity: 1;
     }
   }
 `;
@@ -255,14 +270,81 @@ const NewsTitle = styled.p`
   font-weight: 600;
 `;
 
-const NewsDesc = styled.p`
-  margin: 0;
-  white-space: wrap; 
-  overflow: hidden; 
-  text-overflow: ellipsis; 
-  height: 100px;
-  font-size: 14px;
-  color: #dddddd;
+const PortalsList = styled.div`
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: auto auto auto;
+  margin-top: 10px;
+`;
+
+const PortalDetail = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 10px;
+  ${GlassEffect};
+  box-shadow: none;
+  cursor: pointer;
+  &:hover{
+    transform: scale(1.05);
+  }
+  transition: transform 0.3s ease;
+`;
+
+const PortalLogo = styled.img`
+  width: 45px;
+  height: 45px;
+  border-radius: 6px;
+  background-color: #FFF;
+  object-fit: cover;
+`;
+
+const RecentUpdatesContainer = styled.div`
+  display: flex;
+  gap: 16px;
+`;
+
+
+const UpdateNewsContent = styled.div`
+  position: absolute;
+  top: calc(100% - 30px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 10px;
+  gap: 12px;
+  transition: all 0.3s ease;
+`;
+
+const GradientOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0));
+  transition: all 0.3s ease;
+`;
+
+const RecentUpdate = styled.div`
+  flex: 1;
+  position: relative;
+  height: 410px;
+  overflow: hidden;
+  &:hover{
+    ${UpdateNewsContent} {
+      top: 50%;
+    }
+    ${GradientOverlay} {
+      height: 100%;
+    }
+  }
+  transition: all 0.3s ease;
+`;
+
+const UpdateNewsImg = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 interface IVideoData {
@@ -287,15 +369,18 @@ const Home = () => {
   const [flashNewsData, setFlasNewsData] = useState<string[]>([]);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [latestNewsList, setLatestNewsList] = useState<ILatestNews[]>([]);
+  const [recentUpdates, setRecentUpdates] = useState<ILatestNews[]>([]);
   const curouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const videosList = getVideoCarouselData();
     const flashNewsList = getFlashNewsData();
     const latestNewsList = getLatestNews();
+    const recentUpdates = getRecentUpdates();
     setVideos(videosList);
     setFlasNewsData(flashNewsList);
     setLatestNewsList(latestNewsList);
+    setRecentUpdates(recentUpdates);
   }, []);
 
   useEffect(() => {
@@ -352,7 +437,7 @@ const Home = () => {
           ))}
         </Indicators>
       </FlashNewsContainer>
-      <KeyLinksContainer>
+      <Section>
         <Title>Key Links</Title>
         <SecondaryText>All the important portals to exlpore opportunities and information about ISRO.</SecondaryText>
         <KeyLinksWrapper>
@@ -377,8 +462,8 @@ const Home = () => {
             <SecondaryText>Portal for ISRO tender notifications. regularly updated.</SecondaryText>
           </LinkContainer>
         </KeyLinksWrapper>
-      </KeyLinksContainer>
-      <KeyLinksContainer>
+      </Section>
+      <Section>
         <LatestNewsHeader>
           <LatestNewsTitleWrapper>
             <Title>Latest News</Title>
@@ -408,7 +493,37 @@ const Home = () => {
             <LuArrowRightCircle size={24} />
           </NavigationButton>
         </SliderButtonscontainer>
-      </KeyLinksContainer>
+      </Section>
+      <Section>
+        <Title>ISRO Portals</Title>
+        <SecondaryText>Links to all the ISRO Portals in one place.</SecondaryText>
+        <PortalsList>
+          {ISRO_PORTALS.map(portal => (
+            <PortalDetail>
+              <PortalLogo src={portal.logo} />
+              <NewsTitle>{portal.name}</NewsTitle>
+              <NewsDesc style={{opacity: 1, height: 'fit-content'}}>{portal.desc}</NewsDesc>
+            </PortalDetail>
+          ))}
+        </PortalsList>
+      </Section>
+      <Section>
+        <Title>Recent Updates</Title>
+        <SecondaryText>Stay up-to date with ISRO's latest programmes.</SecondaryText>
+        <RecentUpdatesContainer>
+          {recentUpdates.map(update => (
+            <RecentUpdate>
+              <UpdateNewsImg src={update.thumbnail} />
+              <GradientOverlay />
+              <UpdateNewsContent>
+                <NewsTitle>{update.title}</NewsTitle>
+                <NewsDesc style={{opacity: 1, height: 'fit-content', textAlign: 'center'}}>{update.description}</NewsDesc>
+                <KnowMoreButton>Read More</KnowMoreButton>
+              </UpdateNewsContent>
+            </RecentUpdate>
+          ))}
+        </RecentUpdatesContainer>
+      </Section>
     </Container>
   );
 };
