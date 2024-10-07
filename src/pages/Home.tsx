@@ -524,6 +524,9 @@ const Home = () => {
           ))}
         </RecentUpdatesContainer>
       </Section>
+      <Section>
+        
+      </Section>
     </Container>
   );
 };
